@@ -1,0 +1,108 @@
+<!-- 
+  Name: Spazzy Llama
+  File: strings.html
+  Description: Very basic web form to unlock a secret message using string checks
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Message Page</title>
+
+  <!-- Basic styling -->
+  <style>
+    body {
+      background-color: lightblue;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 20px;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title -->
+  <h1>Enter Your Info to See the Secret!</h1>
+
+  <!-- Form with user inputs -->
+  <form onsubmit="checkInfo(); return false;">
+    
+    <!-- Input for first name -->
+    <input type="text" id="firstName" placeholder="First Name"><br>
+
+    <!-- Input for last name -->
+    <input type="text" id="lastName" placeholder="Last Name"><br>
+
+    <!-- Input for zip code -->
+    <input type="text" id="zipCode" placeholder="Zip Code"><br>
+
+    <!-- Submit button -->
+    <input type="submit" value="Submit">
+
+  </form>
+
+  <!-- Div to show messages -->
+  <div id="message"></div>
+
+  <!-- Basic image for creative element -->
+  <div style="text-align:center; margin-top:20px;">
+    <img src="https://via.placeholder.com/150" alt="Secret" />
+  </div>
+
+  <!-- JavaScript for validation -->
+  <script>
+    // This function runs when the form is submitted
+    function checkInfo() {
+      // Get the input values
+      var first = document.getElementById("firstName").value.trim();
+      var last = document.getElementById("lastName").value.trim();
+      var zip = document.getElementById("zipCode").value.trim();
+      
+      // Combine first and last name with a space
+      var fullName = first + " " + last;
+      
+      // Get the message div
+      var message = document.getElementById("message");
+
+      // Clear old messages
+      message.innerHTML = "";
+
+      // Check if the full name is too long
+      if (fullName.length > 20) {
+        message.innerHTML = "Your full name is too long! Please make it shorter.";
+        return;
+      }
+
+      // Check if zip code is 5 digits
+      var zipCheck = /^\d{5}$/;
+      if (!zipCheck.test(zip)) {
+        message.innerHTML = "Zip code must be 5 numbers.";
+        return;
+      }
+
+      // If all is good, show the secret message
+      message.innerHTML = "✅ SECRET: Max is a cute cat!";
+    }
+  </script>
+
+</body>
+</html>
