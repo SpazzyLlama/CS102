@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Me - Spazzy Llama</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Get in Touch! ✉️</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About Me</a>
+    <a href="contact.html" class="active">Contact Me</a>
+  </nav>
+
+  <main class="content">
+    <section>
+      <h2>Send Me a Message</h2>
+      <p>Have a question about my projects, want to discuss a game idea, or just say hello? Use the form below!</p>
+      <form onsubmit="validateForm(event)">
+        <label for="name">Your Name:</label><br>
+        <input type="text" id="name" name="name" required placeholder="Enter your name"><br><br>
+        <label for="email">Your Email:</label><br>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com"><br><br>
+        <label for="message">Your Message:</label><br>
+        <textarea id="message" name="message" rows="7" required placeholder="Type your message here..."></textarea><br><br>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formMessage"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Spazzy Llama Game Design. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for form validation
+    function validateForm(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let message = document.getElementById("message").value.trim();
+      let formMessage = document.getElementById("formMessage");
+
+      // Reset message style
+      formMessage.style.backgroundColor = '';
+      formMessage.style.color = '';
+
+      // Check for empty name
+      if (name === "") {
+        formMessage.innerHTML = "❌ Please enter your name.";
+        return;
+      }
+
+      // Basic email validation
+      // Using a regex for slightly more robust email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        formMessage.innerHTML = "❌ Please enter a valid email address (e.g., example@domain.com).";
+        return;
+      }
+
+      // Message length validation
+      if (message.length < 10) {
+        formMessage.innerHTML = "❌ Message must be at least 10 characters long.";
+        return;
+      }
+
+      // If all checks pass, display success message
+      formMessage.innerHTML = "✅ Thank you! Your message has been submitted. I'll get back to you soon!";
+
+      // Optionally, clear the form or send data to a server here
+      event.target.reset(); // Clears all form fields
+    }
+  </script>
+</body>
+</html>
